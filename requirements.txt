@@ -1,9 +1,9 @@
-streamlit
+streamlit==1.6.1
 pandas
 numpy
 scikit-learn
 plotly
-joblib
+joblib==1.5.0
 scipy
 statsmodels
 streamlit-lottie
