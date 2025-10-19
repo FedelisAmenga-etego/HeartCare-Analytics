@@ -296,7 +296,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Fedelis Amenga-etego**
 - GitHub: [@FedelisAmenga-etego](https://github.com/FedelisAmenga-etego)
-- Email: [Your Email]
+- Email: fedelis.amenga-etego@outlook.com
 
 ## 🙏 Acknowledgments
 
@@ -320,5 +320,6 @@ For issues, questions, or suggestions:
 3. Include steps to reproduce any bugs
 
 ---
+
 
 **Built by Fedelis Amenga-etego** | *Advanced Medical Intelligence Platform*
