@@ -1,9 +1,0 @@
-streamlit
-pandas
-numpy
-scikit-learn
-plotly
-joblib
-scipy
-statsmodels
-streamlit-lottie
