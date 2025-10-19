@@ -1,9 +1,9 @@
-streamlit==1.6.1
-pandas
-numpy
-scikit-learn
-plotly
+streamlit>=1.25.0
+pandas>=2.0.0,<3.0.0
+numpy>=1.23,<2.0
+scikit-learn>=1.3.0,<1.6.0
+plotly>=5.15.0
 joblib==1.5.0
-scipy
-statsmodels
-streamlit-lottie
+scipy>=1.10.0
+statsmodels>=0.14.0
+streamlit-lottie>=0.0.5
