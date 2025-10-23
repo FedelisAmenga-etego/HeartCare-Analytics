@@ -1,7 +1,3 @@
-# app.py
-# Professional HeartCare Analytics Dashboard
-# Modern design inspired by professional SaaS platforms
-
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -20,7 +16,6 @@ from scipy import stats
 
 st.set_page_config(page_title="HeartCare Analytics", layout="wide", page_icon="❤️", initial_sidebar_state="expanded")
 
-# ==================== CUSTOM CSS ====================
 st.markdown("""
 <style>
     * {
@@ -230,11 +225,11 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# ==================== CONSTANTS ====================
+# CONSTANTS
 DATA_PATH = os.path.join("data", "heart.csv")
 MODEL_PATH = "heart_disease_model.pkl"
 
-# ==================== UTILITY FUNCTIONS ====================
+# UTILITY FUNCTIONS
 @st.cache_data(show_spinner=False)
 def load_data(path=DATA_PATH):
     if not os.path.exists(path):
@@ -300,7 +295,7 @@ def build_and_train_pipeline(df, numeric_cols, categorical_cols, model_path=MODE
     joblib.dump(pipeline, model_path)
     return pipeline, metrics, X_test, y_test, cm
 
-# ==================== LOAD DATA ====================
+# LOAD DATA
 df = load_data()
 if df is None:
     st.error(f"Dataset not found at {DATA_PATH}")
@@ -309,7 +304,7 @@ if df is None:
 df = basic_cleaning(df)
 st.session_state.setdefault('use_tanaka', False)
 
-# ==================== SIDEBAR ====================
+# SIDEBAR
 with st.sidebar:
     st.markdown("### HeartCare Analytics")
     st.divider()
@@ -323,7 +318,7 @@ with st.sidebar:
     st.divider()
     st.caption("Built by Fedelis | HeartCare Analytics Platform")
 
-# ==================== PREPARE DATA ====================
+# PREPARE DATA
 df = create_features(df, use_tanaka=st.session_state['use_tanaka'])
 df['sex_str'] = df['sex'].map({1:'Male', 0:'Female'}) if df['sex'].dtype != object else df['sex']
 df_filtered = df[(df['age'] >= age_range[0]) & (df['age'] <= age_range[1]) & 
@@ -332,7 +327,7 @@ df_filtered = df[(df['age'] >= age_range[0]) & (df['age'] <= age_range[1]) &
 numeric_cols = ['age','trestbps','chol','thalach','oldpeak','chol_age_ratio','heart_rate_reserve','age_trestbps_interaction']
 categorical_cols = [c for c in ['sex','cp','fbs','restecg','exang','slope','ca','thal'] if c in df.columns]
 
-# ==================== MODEL ====================
+# MODEL 
 model_exists = os.path.exists(MODEL_PATH)
 pipeline = metrics = X_test = y_test = cm = None
 
@@ -363,7 +358,7 @@ if metrics is None and pipeline is not None:
     except:
         metrics = {}
 
-# ==================== HEADER ====================
+# HEADER 
 st.markdown("""
 <div style='text-align: center; background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%); 
             color: white; padding: 32px 40px; border-radius: 12px; margin-bottom: 32px; 
@@ -373,10 +368,10 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# ==================== TABS ====================
+# TABS 
 tab1, tab2, tab3, tab4, tab5 = st.tabs(["Dashboard", "Prediction", "Model Performance", "Analytics", "Insights"])
 
-# ==================== TAB 1: DASHBOARD ====================
+# TAB 1: DASHBOARD 
 with tab1:
     total = len(df)
     cases = int(df['target'].sum())
@@ -425,7 +420,7 @@ with tab1:
         fig.update_layout(height=350, margin=dict(l=0,r=0,t=40,b=0))
         st.plotly_chart(fig, use_container_width=True)
 
-# ==================== TAB 2: PREDICTION ====================
+# TAB 2: PREDICTION
 with tab2:
     st.markdown("### Patient Risk Assessment")
     
@@ -586,7 +581,7 @@ with tab2:
             except Exception as e:
                 st.warning("Could not compute feature importances")
 
-# ==================== TAB 3: MODEL PERFORMANCE ====================
+# TAB 3: MODEL PERFORMANCE
 with tab3:
     col1, col2, col3, col4, col5 = st.columns(5, gap="large")
     with col1:
@@ -615,7 +610,7 @@ with tab3:
         fig.update_layout(height=350, margin=dict(l=0,r=0,t=40,b=0))
         st.plotly_chart(fig, use_container_width=True)
 
-# ==================== TAB 4: ANALYTICS ====================
+# TAB 4: ANALYTICS 
 with tab4:
     col1, col2, col3 = st.columns(3, gap="large")
     with col1:
@@ -649,7 +644,7 @@ with tab4:
         fig.update_layout(height=350, margin=dict(l=0,r=0,t=40,b=0))
         st.plotly_chart(fig, use_container_width=True)
 
-# ==================== TAB 5: INSIGHTS ====================
+# TAB 5: INSIGHTS 
 with tab5:
     col1, col2 = st.columns(2, gap="large")
     with col1:
@@ -689,4 +684,5 @@ st.markdown("""
     <p style='font-size: 12px;'>Built by Fedelis | Advanced Medical Intelligence</p>
     <p style='font-size: 11px; margin-top: 12px;'>⚠️ For educational purposes only - Not a substitute for professional medical advice</p>
 </div>
+
 """, unsafe_allow_html=True)
